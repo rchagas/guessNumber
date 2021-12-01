@@ -1,0 +1,30 @@
+#digit-two, #digit-three{
+  display: none;  
+}
+
+.number {
+  background-image: url('img/number.png');
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 160px;
+  margin: auto;
+  display: inline-block;
+}
+
+.zero{background-position: -6px -11px;}
+.one{background-position: -108px -11px;}
+.two{background-position: -206px -11px;}
+.three{background-position: -313px -11px;}
+.four{background-position: -415px -11px;}
+.five{background-position: -510px -11px;}
+.six{background-position: -615px -11px;}
+.seven {background-position: -720px -11px;}
+.eight {background-position: -815px -11px;}
+.nine {background-position: -920px -6px;}
+.green {background-position-y: -179px;}
+.red {background-position-y: -338px;}
+
+@media only screen and (max-width: 1000px)
+{
+
+}
