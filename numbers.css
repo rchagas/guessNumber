@@ -5,22 +5,22 @@
 .number {
   background-image: url('number.png');
   background-repeat: no-repeat;
-  width: 93px;
+  width: 90px;
   height: 160px;
   margin: auto;
   display: inline-block;
 }
 
-.zero{background-position: -6px -11px;}
-.one{background-position: -108px -11px;}
-.two{background-position: -206px -11px;}
-.three{background-position: -313px -11px;}
+.zero{background-position: -10px -11px;}
+.one{background-position: -115px -11px;}
+.two{background-position: -216px -11px;}
+.three{background-position: -318px -11px;}
 .four{background-position: -415px -11px;}
-.five{background-position: -510px -11px;}
-.six{background-position: -615px -11px;}
-.seven {background-position: -720px -11px;}
-.eight {background-position: -815px -11px;}
-.nine {background-position: -920px -6px;}
+.five{background-position: -516px -11px;}
+.six{background-position: -618px -11px;}
+.seven {background-position: -723px -11px;}
+.eight {background-position: -820px -11px;}
+.nine {background-position: -925px -6px;}
 .green {background-position-y: -179px;}
 .red {background-position-y: -338px;}
 
