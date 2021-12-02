@@ -6,7 +6,10 @@
  * por um arquivo css especifico para tal com o uso de classes.
  */
 
-const url = 'https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300';
+const minRange = 1;
+const maxRange = 300;
+
+const url = 'https://us-central1-ss-devops.cloudfunctions.net/rand?min='+minRange+'&max='+maxRange;
 const signboard = [
   document.getElementById('digit-one'), 
   document.getElementById('digit-two'), 
@@ -14,13 +17,40 @@ const signboard = [
 ];
 const tip = document.getElementById('tip');
 
-let matchNumber;
+let drawnNumber;
+
+
+/**
+ * Start the game
+ */
+async function startGame(){
+  drawnNumber = await getNumber()
+  console.log('Drawn Number: '+drawnNumber);
+}
+
+/**
+ * Send button function, set the signboard with input number
+ * and check result
+ */
+function send(){
+  let input = document.getElementById('number-input').value;
+  if(input > 0 && input < 999){
+    digitalScreen(input);
+    compareNumbers(input, drawnNumber);    
+  }
+  else{
+    for(element of signboard)
+    element.classList.add('red');
+    tip.innerHTML = 'ERRO: Fora do intervalo';
+    tip.style.color = '#CC3300';
+  }
+}
 
 /**
  * Request Drawn Number
  */
-async function getNumber(){
-  await fetch(url)
+ async function getNumber(){
+  return await fetch(url)
   .then(
     response => {
       if(response.status == 200){
@@ -35,25 +65,8 @@ async function getNumber(){
         endProgram();
       }
   })
-  .then(
-    res => {
-      matchNumber = res.value;
-      console.log('Drawn Number: '+matchNumber);
-    }
-  )
-  .catch(error => {
-    console.error(error);
-  })
-}
-
-/**
- * Send button function, set the signboard with input number
- * and check result
- */
-async function send(){
-  let input = document.getElementById('number-input').value;
-  digitalScreen(input);
-  compareNumbers(input);
+  .then(res => { return res.value;})
+  .catch(error => {console.error(error);})
 }
 
 /**
@@ -87,15 +100,15 @@ function digitalScreen(number){
  * If the numbers are the same end the program
  * either set tip as "É menor" or "É maior"
  */
-function compareNumbers(number){
-  if(number == matchNumber){
+function compareNumbers(numberOne,numberTwo){
+  if(numberOne == numberTwo){
     for(element of signboard)
       element.classList.add('green');
     tip.innerHTML = 'Você acertou!!!'
     tip.style.color = '#32BF00';   
     endProgram();
   }
-  else if (number< matchNumber)
+  else if (numberOne < numberTwo)
     tip.innerHTML = 'É maior'
   else tip.innerHTML = 'É menor'
 }
