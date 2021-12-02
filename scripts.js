@@ -27,7 +27,7 @@ async function getNumber(){
   .then(
     res => {
       matchNumber = res.value;
-      console.log(matchNumber);
+      console.log('SortNumber: '+matchNumber);
     }
   )
   .catch(error => {
@@ -69,8 +69,24 @@ function compareNumbers(number){
     tip.innerHTML = 'Você acertou!!!'
     tip.style.color = '#32BF00';
     document.getElementById('new-match').style.visibility = 'visible';
+    disableInput();
   }
   else if (number< matchNumber)
     tip.innerHTML = 'É maior'
   else tip.innerHTML = 'É menor'
+}
+
+function disableInput(){
+  let button = document.getElementById("send-button");
+  let input = document.getElementById("number-input");
+
+  button.disabled = true;
+  input.disabled = true;
+
+  button.style.background = 'none';
+  button.style.backgroundColor = '#DDDDDD'
+
+  input.value = '';
+  input.style.borderColor = '#CFCFCF';
+  input.style.backgroundColor = '#F5F5F5'
 }
