@@ -11,6 +11,7 @@ Para exibição dos numeros deve ser usado uma simulação de um display digital
 segmentos. Para construção deste display foi utilizado uma sprite autoral com os
 os 10 digitos em 3 cores, preto, verde e vermelho. Com o uso de css cada numero é
 exibido de forma independente.
+![](./number.png)
 
 A logica do programa consiste em fazer o request de um numero no carregamento
 da pagina e salva-lo em uma variavel.
