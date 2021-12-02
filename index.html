@@ -3,7 +3,7 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" type="text/css" href="numbers.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=2.0, maximum-scale=2.0 user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=0">
   </head>
   <body onload="getNumber()">
     <div class="container">
@@ -16,10 +16,10 @@
         <div id="digit-one" class="number zero"></div>
         <button id="new-match" class="" onclick="">NOVA PARTIDA</button>
       </div>
-      <span id="input" >
-        <input id="number-input" label="Digite o palpite">
+      <div id="input" >
+        <input id="number-input" label="Digite o palpite" type="number" max="300" min="0">
         <button id="send-button" class="" onclick="send()">ENVIAR</button>
-      </span>
+      </div>
     </div>
   </body>
   <script src="scripts.js"></script>

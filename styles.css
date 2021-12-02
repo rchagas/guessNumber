@@ -14,13 +14,18 @@ body{
   background-image: linear-gradient(#EEEEEE, #FFFFFF);
 }
 
+div {
+  margin: 0 auto;  
+}
+
 button{
   padding: 10px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  border-color: transparent;
+  border: none;
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-weight: 1000;
+  border-radius: 4px;
 }
 
 hr {
@@ -63,7 +68,6 @@ hr {
 }
 
 #send-button{
-  border-radius: 4px;
   height: 42px;
   background-image: linear-gradient(var(--primary-color), var(--secondary-color) 100%);
   margin: 5px;
@@ -75,8 +79,8 @@ hr {
 }
 
 #input input{
-  width: 200px;
-  height: 40px;
+  width: 65%;
+  height: 100%;
   border-color: var(--primary-color);
   border-radius: 4px;
   margin: 5px;
@@ -87,14 +91,22 @@ hr {
   body{
     margin: 10%;
   }
+
+  .numbers{
+    margin-top: 35%;
+    margin-bottom: 35%;
+  }
+
   .title{
     font-weight: 1000;
-    font-size: 350%;
+    font-size: 160%;
     margin-bottom: 10px;
   }
   hr {
     margin: auto;
     width: 70%;
   }
+  #input input{
 
+  }
 }
