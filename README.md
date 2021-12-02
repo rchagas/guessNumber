@@ -17,3 +17,6 @@ A logica do programa consiste em fazer o request de um numero no carregamento
 da pagina e salva-lo em uma variavel.
 O mapeamento dos numeros na sprite e feito por um arquivo css especifico para
 manipular os numeros com o uso de classes.
+
+O resultado final pode ser visto através do link:
+https://rchagas.github.io/guessNumber
