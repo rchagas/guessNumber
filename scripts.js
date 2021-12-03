@@ -59,22 +59,6 @@ function send(){
   else error(999,'ERRO: Fora do intervalo');
 }
 
-
-/**
- * Display one number until 3 digits on digital display
- */
-function writeNumbersOnDisplay(number){ 
-  const numbersDictionary = {0:'zero', 1:'one', 2:'two', 3:'three', 4:'four', 5:'five', 6:'six', 7:'seven', 8:'eight', 9:'nine'}
-  
-  visibleNumbers(number);
-  
-  digitalDisplay[2].className = 'number '.concat(numbersDictionary[(number - number%100)/100]);
-  number = number%100;
-  digitalDisplay[1].className = 'number '.concat(numbersDictionary[(number - number%10)/10]);
-  number = number%10;
-  digitalDisplay[0].className = 'number '.concat(numbersDictionary[number]);
-}
-
 /**
  * Compare drawn number with user number:
  * If the numbers are the same end the program
@@ -119,6 +103,34 @@ function endProgram(){
   input.style.backgroundColor = '#F5F5F5'
 }
 
+
+function error(code, message){
+  writeNumbersOnDisplay(code);
+  writeTip(message,'#CC3300');
+  colorNumbers('red');
+}
+
+function writeTip (message, color) {
+  const tip = document.getElementById('tip');
+  tip.innerHTML = message;
+  tip.style.color = color;
+}
+
+/**
+ * Display one number until 3 digits on digital display
+ */
+ function writeNumbersOnDisplay(number){ 
+  const numbersDictionary = {0:'zero', 1:'one', 2:'two', 3:'three', 4:'four', 5:'five', 6:'six', 7:'seven', 8:'eight', 9:'nine'}
+  
+  visibleNumbers(number);
+  
+  digitalDisplay[2].className = 'number '.concat(numbersDictionary[(number - number%100)/100]);
+  number = number%100;
+  digitalDisplay[1].className = 'number '.concat(numbersDictionary[(number - number%10)/10]);
+  number = number%10;
+  digitalDisplay[0].className = 'number '.concat(numbersDictionary[number]);
+}
+
 function visibleNumbers(number){
   digitalDisplay[0].style.display = 'inline-block';
   for(digitos = digitalDisplay.length-1 ; digitos>0 ; digitos--){
@@ -133,12 +145,6 @@ function visibleNumbers(number){
   }
 }
 
-function error(code, message){
-  writeNumbersOnDisplay(code);
-  writeTip(message,'#CC3300');
-  colorNumbers('red');
-}
-
 function colorNumbers(color){
   if(color !== ''){
     for(element of digitalDisplay)
@@ -150,8 +156,3 @@ function colorNumbers(color){
   }
 }
 
-function writeTip (message, color) {
-  const tip = document.getElementById('tip');
-  tip.innerHTML = message;
-  tip.style.color = color;
-}
