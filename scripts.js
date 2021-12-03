@@ -10,40 +10,21 @@ const minRange = 1;
 const maxRange = 300;
 
 const url = 'https://us-central1-ss-devops.cloudfunctions.net/rand?min='+minRange+'&max='+maxRange;
-const signboard = [
-  document.getElementById('digit-one'), 
-  document.getElementById('digit-two'), 
+
+const digitalDisplay = [
+  document.getElementById('digit-one'),
+  document.getElementById('digit-two'),
   document.getElementById('digit-three')
 ];
-const tip = document.getElementById('tip');
 
 let drawnNumber;
-
 
 /**
  * Start the game
  */
 async function startGame(){
   drawnNumber = await getNumber()
-  console.log('Drawn Number: '+drawnNumber);
-}
-
-/**
- * Send button function, set the signboard with input number
- * and check result
- */
-function send(){
-  let input = document.getElementById('number-input').value;
-  if(input > 0 && input < 999){
-    digitalScreen(input);
-    compareNumbers(input, drawnNumber);    
-  }
-  else{
-    for(element of signboard)
-    element.classList.add('red');
-    tip.innerHTML = 'ERRO: Fora do intervalo';
-    tip.style.color = '#CC3300';
-  }
+  console.log('Drawn Number: ' + drawnNumber);
 }
 
 /**
@@ -57,11 +38,7 @@ function send(){
         return response.json();
       }
       else{
-        digitalScreen(response.status)
-        for(element of signboard)
-          element.classList.add('red');
-        tip.innerHTML = 'ERRO';
-        tip.style.color = '#CC3300';
+        error(response.status,'ERRO');
         endProgram();
       }
   })
@@ -70,29 +47,32 @@ function send(){
 }
 
 /**
+ * Send button function, set the signboard with input number
+ * and check result
+ */
+function send(){
+  let input = document.getElementById('number-input').value;
+  if(input > 0 && input < 1000){
+    writeNumbersOnDisplay(input);
+    compareNumbers(input, drawnNumber);
+  }
+  else error(999,'ERRO: Fora do intervalo');
+}
+
+
+/**
  * Display one number until 3 digits on digital display
  */
-function digitalScreen(number){
+function writeNumbersOnDisplay(number){ 
+  const numbersDictionary = {0:'zero', 1:'one', 2:'two', 3:'three', 4:'four', 5:'five', 6:'six', 7:'seven', 8:'eight', 9:'nine'}
   
-  let numbersDictionary = {0:'zero', 1:'one', 2:'two', 3:'three', 4:'four', 5:'five', 6:'six', 7:'seven', 8:'eight', 9:'nine'}
+  visibleNumbers(number);
   
-  if(number < 100){
-    signboard[2].style.display = 'none';
-    if(number<10)
-      signboard[1].style.display = 'none';
-    else{
-      signboard[1].style.display = 'inline-block';
-    }
-  }
-  else{
-    signboard[2].style.display = 'inline-block';
-    signboard[1].style.display = 'inline-block';
-  }
-  signboard[2].className = 'number '.concat(numbersDictionary[(number - number%100)/100]);
+  digitalDisplay[2].className = 'number '.concat(numbersDictionary[(number - number%100)/100]);
   number = number%100;
-  signboard[1].className = 'number '.concat(numbersDictionary[(number - number%10)/10]);
+  digitalDisplay[1].className = 'number '.concat(numbersDictionary[(number - number%10)/10]);
   number = number%10;
-  signboard[0].className = 'number '.concat(numbersDictionary[number]);
+  digitalDisplay[0].className = 'number '.concat(numbersDictionary[number]);
 }
 
 /**
@@ -102,15 +82,17 @@ function digitalScreen(number){
  */
 function compareNumbers(numberOne,numberTwo){
   if(numberOne == numberTwo){
-    for(element of signboard)
-      element.classList.add('green');
-    tip.innerHTML = 'Você acertou!!!'
-    tip.style.color = '#32BF00';   
-    endProgram();
+    matchNumbers();
   }
   else if (numberOne < numberTwo)
-    tip.innerHTML = 'É maior'
-  else tip.innerHTML = 'É menor'
+    writeTip('É maior','#FF6600');
+  else writeTip('É menor','#FF6600');
+}
+
+function matchNumbers(){
+  colorNumbers('green');
+  writeTip('Você acertou!!!', '#32BF00');
+  endProgram();
 }
 
 /**
@@ -135,4 +117,41 @@ function endProgram(){
   input.value = '';
   input.style.borderColor = '#CFCFCF';
   input.style.backgroundColor = '#F5F5F5'
+}
+
+function visibleNumbers(number){
+  digitalDisplay[0].style.display = 'inline-block';
+  for(digitos = digitalDisplay.length-1 ; digitos>0 ; digitos--){
+    if(number >= Math.pow(10,digitos)){
+      for(digitos ; digitos>0 ; digitos--)
+        digitalDisplay[digitos].style.display = 'inline-block';
+      break;
+    }
+    else {
+      digitalDisplay[digitos].style.display = 'none';
+    }
+  }
+}
+
+function error(code, message){
+  writeNumbersOnDisplay(code);
+  writeTip(message,'#CC3300');
+  colorNumbers('red');
+}
+
+function colorNumbers(color){
+  if(color !== ''){
+    for(element of digitalDisplay)
+      element.classList.add(color);
+  }
+  else {
+    for(element of digitalDisplay)
+      element.classList.remove('red','green');
+  }
+}
+
+function writeTip (message, color) {
+  const tip = document.getElementById('tip');
+  tip.innerHTML = message;
+  tip.style.color = color;
 }
