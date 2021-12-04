@@ -18,5 +18,7 @@ de uma API externa no carregamento da página e salvá-lo em uma variável.
 O mapeamento dos números para o display de 7 segmentos foi feito por um arquivo 
 .css específico para manipular os números na imagem da sprite com o uso de classes no html.
 
+Usando a biblioteca Jasmine foram feito alguns testes de unidade.
+
 O resultado final pode ser visto através do link:
 https://rchagas.github.io/guessNumber
