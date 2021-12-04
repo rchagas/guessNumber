@@ -11,7 +11,7 @@ Para exibição dos números deve ser usado uma simulação de um display digita
 segmentos. Para construção deste display foi utilizado uma sprite autoral com os
 os 10 dígitos em 3 cores, preto, verde e vermelho. Com o uso de css cada número é
 exibido de forma independente.
-![](./number.png)
+![](../img/number.png)
 
 A lógica do programa consiste em fazer uma requisição para obter um número aleatório
 de uma API externa no carregamento da página e salvá-lo em uma variável.
